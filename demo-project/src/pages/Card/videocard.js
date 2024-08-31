@@ -1,7 +1,7 @@
 import "./videocard.css";
 export default function VideoCard({ Comname, text, videoSrc }) {
   return (
-    <div className="Container-fluid cards border-1 rounded-1 my-2 mx-4">
+    <div className="Container-fluid border-1 rounded-1 my-2 mx-4">
       <div className="card" style={{ width: "100%" }} >
         <div className="text-center">
           <video width="92%" controls className="border-0 rounded-2 mt-3">

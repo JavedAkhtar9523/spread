@@ -63,7 +63,7 @@ const HomePageComponent = ({ scrollableContentRef }) => {
         </div>
         <div className="col-6 scrollable-content" ref={scrollableContentRef}>
           <div
-            className="d-flex gap-5"
+            className="d-flex "
             style={{ justifyContent: "space-around" }}
           >
             <div onClick={StoryClick} className="position-relative">
@@ -96,7 +96,7 @@ const HomePageComponent = ({ scrollableContentRef }) => {
               <p>Video Room</p>
             </div>
           </div>
-          <div className="home-center">
+          <div className="home-center mx-4">
             {loading ? (
               <Loading />
             ) : posts?.length > 0 ? (

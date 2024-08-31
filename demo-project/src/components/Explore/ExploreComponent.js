@@ -7,7 +7,7 @@ import StoryVideoCard from './../../pages/Card/storyvideocard';
 import VideoCard from './../../pages/Card/videocard';
 import "./../../pages/Card/videocard.css";
 import AudioCard from "./../../pages/Card/AudioCard";
-
+import ReelsFeed from './../reals/ReelsFeed.jsx';
 const btns = [
   { id: 1, title: "Trending" },
   { id: 2, title: "Reels" },
@@ -80,13 +80,11 @@ const ExploreComponent = ({ scrollableContentRef }) => {
                   </h3>
                 </div>
               )}
-              {activeButton === 'Reels' && <div className='d-flex video-container justify-content-around align-items-center flex-wrap'>
-                <StoryVideoCard videoSrc="story1.mp4" />
-                <StoryVideoCard videoSrc="story1.mp4" />
-                <StoryVideoCard videoSrc="story1.mp4" />
-                <StoryVideoCard videoSrc="story1.mp4" />
-                <StoryVideoCard videoSrc="story1.mp4" />
-                <StoryVideoCard videoSrc="story1.mp4" />
+              {activeButton === 'Reels' && <div className=''>
+                
+                <div>
+                 <ReelsFeed />
+                  </div>
                 </div>}
              
               {activeButton === 'Audios' && <div className="d-flex justify-content-around align-items-center flex-wrap video-container">
@@ -122,7 +120,8 @@ const ExploreComponent = ({ scrollableContentRef }) => {
           />
                   
                 </div>}
-              {activeButton === 'Videos' && <div className='video-container'>
+
+              {activeButton === 'Videos' && <div className='video-container w-100'>
               
             <VideoCard
               Comname="Mai mujhe bhulunga nhi"

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { Link } from "react-router-dom";
 import { IoIosShareAlt } from "react-icons/io";
+import { IoIosSettings } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import Carousel from "../carosuel/carousel";
@@ -144,9 +145,18 @@ export const initialProfiles = [
 ];
 
 const Profile = ({ scrollableContentRef }) => {
+  let additional_links = [
+    "https://www.linkedin.com/in/rupendr546",
+    "https://www.instagram.com/rupendravish_9186/",
+    // "https://www.linkedin.com/in/sjova",
+    "https://www.instagram.com/sharuam/"
+
+  ]
+  console.log(additional_links.length);
   const title = "Prefect Match";
   const [selectedCategory, setSelectedCategory] = useState("feature");
   const [profiles, setProfiles] = useState(initialProfiles);
+  const [expands, setExpands] = useState(false);
 
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.allUsers);
@@ -157,7 +167,9 @@ const Profile = ({ scrollableContentRef }) => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
-
+ 
+  const displaylinks = expands ? additional_links: additional_links.slice(0, 2);
+ 
   return (
     <div className="container-fluid " style={{ backgroundColor: "whitesmoke" }}>
       <div className="row">
@@ -168,9 +180,8 @@ const Profile = ({ scrollableContentRef }) => {
           </div>
         </div> */}
         <div
-          className="col-8 bg-white mt-4 scrollable-content"
-          ref={scrollableContentRef}
-        >
+          className="col-8 bg-white mt-4 scrollable-content "
+          ref={scrollableContentRef} >
           <main className="profile-container">
             <div className="cover-img">
               <img
@@ -179,10 +190,11 @@ const Profile = ({ scrollableContentRef }) => {
                   "https://live.staticflickr.com/65535/49627006528_4eabfb3cdd_z.jpg"
                 }
               />
-              <span className="bi bi-bi-gear-fill"></span>
+              <span><IoIosSettings className="setting-icon" /></span>
+              {/* <span className="bi bi-bi-gear-fill"></span> */}
             </div>
             <div className="row">
-              <div className="col-4">
+              <div className="col-3">
                 <div className="avatar-box ms-2">
                   <div className="avatar">
                     <img
@@ -192,27 +204,44 @@ const Profile = ({ scrollableContentRef }) => {
                       }
                       alt=""
                     />
-                    <FaPlus className="plus-icons fs-4 pb-1" />
+            
+                    {/* <FaPlus className="plus-icons fs-4 pb-1" /> */}
                   </div>
+                </div>
+              </div>
+              <div className="col-8">
+              <div className="profile-content mt-2">
+                 <div className="bio ">
+                 <p  className=" "> {user?.bio}</p>
+                 <p className="text-secondary">{user?.address}</p>
+                 </div>
+              </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-3">
+                <div className=" ms-2">
+                 
                   <div className="d-flex justify-content-center flex-column align-items-left ms-2">
                     <div className="d-flex align-items-center gap-2 mt-1  w-100">
                       <h4
-                        className="fw-bold mt-1"
-                        style={{ fontSize: "0.8rem" }}
+                        className="fw-bold  mt-1"
+                        style={{ fontSize: "0.9rem" }}
                       >
                         {user?.firstName} {user?.lastName}
                       </h4>
-                      <VscVerifiedFilled className="fs-6  text-primary" />
+                      <VscVerifiedFilled className="fs-6 text-primary" />
                     </div>
                     <span
-                      className="badge text-bg-light fw-light"
-                      style={{ fontSize: "0.6rem", marginRight: "120px" }}
+                      className="badge  fw-light"
+                      style={{ fontSize: "0.6rem", marginRight: "70px" }}
                     >
                       {user?.email}
                     </span>
                     <span
-                      className="badge text-bg-light mt-2 fw-light"
-                      style={{ fontSize: "0.6rem", marginRight: "90px" }}
+                      className="badge  mt-2 fw-light"
+                      style={{ fontSize: "0.6rem", marginRight: "50px" }}
                     >
                       {user?.username}
                     </span>
@@ -221,10 +250,10 @@ const Profile = ({ scrollableContentRef }) => {
                         to="/followers"
                         className="text-decoration-none "
                       >
-                        <div className="text-center">
+                        <div className="text-center fw-semibold text-black">
                           <p>{user?.followers.length}</p>
                           <p
-                            className="text-secondary"
+                            className=""
                             style={{ fontSize: "0.9rem", marginTop: "-5px" }}
                           >
                             Followers
@@ -235,10 +264,10 @@ const Profile = ({ scrollableContentRef }) => {
                         to="/following"
                         className="text-decoration-none ms-3"
                       >
-                        <div className="text-center ms-3">
+                        <div className="text-center ms-3 fw-semibold text-dark">
                           <p>{user?.following.length}</p>
                           <p
-                            className="text-secondary"
+                            className=""
                             style={{ fontSize: "0.9rem", marginTop: "-5px" }}
                           >
                             Following
@@ -250,13 +279,30 @@ const Profile = ({ scrollableContentRef }) => {
                 </div>
               </div>
               <div className="col-8">
-                <div className="profile-content mt-3">
-                  <p
-                    className="text-muted"
-                    style={{ fontSize: "1rem", fontFamily: "cursive" }}
-                  >
-                    {user?.bio}
-                  </p>
+                <div className="profile-content mt-2">
+                 <div className="additional-box">
+                 <h5 className="">Additional links</h5>
+                 {displaylinks.map((link, index) => (
+                    <p key={index}>
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        {link}
+                      </a>
+                    </p>
+                  ))}
+                  {additional_links.length > 2 && (
+                    <a
+                      href="#"
+                      className="text-decoration-none "
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setExpands(!expands);
+                      }}
+                    >
+                      {expands ? "Read Less" : "Read More"}
+                    </a>
+                  )}
+                 </div>
+
                   <div className="d-flex flex-row-reverse">
                     <div className="profile-btn float-end">
                       <NavLink
@@ -291,49 +337,47 @@ const Profile = ({ scrollableContentRef }) => {
             </div>
           </main>
           <hr />
-          <div className="chart">
-            <div className="d-flex justify-content-between">
-              <div className="chart-list ms-3">
-                <div>
-                  <h4>Analytics</h4>
-                  <ul>
-                    <li>Average views</li>
-                    <li>Average Likes</li>
-                    <li>Recently Visits</li>
-                    <li>Earth Appearances</li>
-                    <li>Total time Expand</li>
-                  </ul>
-                  {/* <select>
-                    <option>More</option>
-                    <option>Nature</option>
-                    <option value="">Social</option>
-                  </select> */}
+          <div className="chart">         
+                <div className="chart-list">
+                  <h4>Reach</h4>
+                  <h4>72</h4>
+                  <h6 className="fw-medium mb-5">Accounts Reached</h6>
+                
+                    <p className="d-flex justify-content-between"><span>Followers</span><span>{user?.followers.length}</span></p>
+                    <p className="d-flex justify-content-between"><span>Non-Followers</span><span>{user?.following.length}</span></p>
+                    <p className="d-flex justify-content-between"><span>Search Appearances</span><span>10</span></p>
+                    <p className="d-flex justify-content-between"><span>Post Impression</span><span>8</span></p>
+                 
+                 
                 </div>
-              </div>
+                <div className=" ms-5" style={{width: "350px", height:"350px"}}>
               <ChartComponent />
-            </div>
+              <div className="text-end mt-4 ">
+                <button className="text-white bg-primary border-0 px-2 rounded-1">More Insights</button>
+              </div>
+              </div>
           </div>
           <hr />
           <div className="feature d-flex justify-content-left flex-column text-align-left text-left">
-            <div className="ms-2">
-              <h3 style={{ marginLeft: "10px" }}>Featured Post</h3>
-              {/* <select
+            {/* <div className="ms-2">
+              <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
                 <option value="all" selected>
                   All
                 </option>
-                <h3>Featured Post</h3>
                 <option value="feature">Featured-Post</option>
                 <option value="nature">Nature</option>
                 <option value="science">Science</option>
-              </select> */}
-            </div>
+              </select>
+            </div> */}
+            <h5 className="ms-3">Featured Post</h5>
             <div className="mt-2 d-flex ms-3 align-items-center">
               <Carousel posts={featuredPosts} category={selectedCategory} />
             </div>
           </div>
+          <hr />
           <div className="mt-3">
             <ActivitySection activities={featuredPosts} />
           </div>
