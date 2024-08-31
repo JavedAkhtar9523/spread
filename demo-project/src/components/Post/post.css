@@ -7,3 +7,16 @@
 .colon-card button:hover {
    
 }
+.About_this_post{
+    width: 400px;
+    border: none;
+    border-radius: 5px;
+
+}
+.home_About_colon{
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 5%;
+    left: -150%;
+}

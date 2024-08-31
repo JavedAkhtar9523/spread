@@ -24,6 +24,7 @@ import CreateComent from "./Comment/CreateComent.jsx";
 import ColonCard from "./ColonCard";
 import { useOutsideClick } from "../../utlis/useOutsideClick.js";
 import { toast } from "react-toastify";
+import { IoIosShareAlt } from "react-icons/io";
 // import Comment from "./Comment";
 
 function PostHome({ posts }) {
@@ -130,11 +131,12 @@ function PostHome({ posts }) {
             {colon && (
               <div
                 className="position-absolute"
-                style={{
-                  marginLeft: "-13rem",
-                  zIndex: "1000",
-                  marginTop: "-3.6rem",
-                }}
+                // style={{
+                //   marginLeft: "-13rem",
+                //   zIndex: "1000",
+                //   marginTop: "-3.6rem",
+                // }}
+                style={{top: "-32px", right: "-8px", zIndex: "1000"}}
               >
                 <ColonCard
                   handleShare={handleShare}
@@ -268,10 +270,10 @@ function PostHome({ posts }) {
 
             <button
               className="action-btn share-btn"
-              style={{ marginLeft: "460px" }}
+              style={{ marginLeft: "420px" }}
               onClick={handleShare}
             >
-              <FaRegPaperPlane />
+              <IoIosShareAlt />
             </button>
           </div>
           {/* ------------------------------------ */}

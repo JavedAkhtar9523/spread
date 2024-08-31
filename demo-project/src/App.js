@@ -15,6 +15,8 @@ import Footer from "./layouts/Footer/footer.jsx";
 import Home from "./layouts/Home/home.js";
 // Lazy loaded components
 const Profile = lazy(() => import("./components/Profile/profile"));
+const LiveSpread = lazy(() => import("./components/Audiolive/LiveSpread.js"));
+
 const UserRegister = lazy(() =>
   import("./components/Auth/Register/UserRegister")
 );
@@ -140,6 +142,7 @@ function App() {
               <Route path="/video-slide" element={<StoryCarosuel />} />
               <Route path="/followers" element={<Followers />} />
               <Route path="/following" element={<Following />} />
+              <Route path="/spread-live" element={<LiveSpread />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/home" replace />} />
