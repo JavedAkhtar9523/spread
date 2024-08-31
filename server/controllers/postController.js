@@ -12,7 +12,7 @@ export const createPost = async (req, res, next) => {
     let images = [];
     let videos = [];
     let audio = null;
-
+   
     if (typeof req.body.images === "string") {
       images.push(req.body.images);
     } else if (Array.isArray(req.body.images)) {
@@ -78,15 +78,30 @@ export const createPost = async (req, res, next) => {
 
     req.body.images = imageLinks;
 
-    // Ensure req.user.avatar is a string (URL)
+      
+    if (typeof req.body.poll === 'string') {
+      req.body.poll = JSON.parse(req.body.poll);
+    }
+
+    if (req.body.poll && Array.isArray(req.body.poll.options)) {
+      req.body.poll.options = req.body.poll.options.map(option => {
+        if (typeof option === 'string') {
+          return { option, votes: 0 };
+        }
+        return option;
+      });
+    }
+
+   
     const avatarUrl = typeof req.user.avatar === 'string' ? req.user.avatar : (req.user.avatar?.[0]?.url || '');
+
 
     // Create a new post
     const post = await Post.create({
       ...req.body,
       postedBy: req.user._id,
       author: {
-        avatar: avatarUrl, // Set the URL directly
+        avatar: avatarUrl, 
         name: `${req.user.firstName} ${req.user.lastName}`,
         username: req.user.username,
         email: req.user.email,
@@ -557,9 +572,6 @@ export const likeOrDislikePost = async (req, res) => {
   }
 };
 
-
-
-
 export const getPostReplyDetails = async (req, res) => {
   try {
     const post = await Post.findById(req.params.postId)
@@ -573,5 +585,96 @@ export const getPostReplyDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const repostPost = async (req, res) => {
+  try {
+    const originalPostId = req.params.postId.trim();
+
+    if (!mongoose.Types.ObjectId.isValid(originalPostId)) {
+      return res.status(400).json({ message: 'Invalid Post ID' });
+    }
+
+    const userId = req.user._id;
+
+    // Fetch the original post
+    const originalPost = await Post.findById(originalPostId).populate('postedBy', 'name username avatar email');
+
+    if (!originalPost) {
+      return res.status(404).json({ message: 'Original post not found' });
+    }
+
+    if (originalPost.postedBy._id.toString() === userId.toString()) {
+      return res.status(400).json({ message: 'You cannot repost your own post' });
+    }
+
+    const existingRepost = await Post.findOne({ postedBy: userId, originalPost: originalPostId, isRepost: true });
+    if (existingRepost) {
+      return res.status(400).json({ message: 'You have already reposted this post' });
+    }
+
+    // Create a new repost
+    const repost = new Post({
+      content: originalPost.content,
+      postedBy: userId,
+      author: {
+        avatar: originalPost.author.avatar,
+        name: originalPost.author.name,
+        username: originalPost.author.username,
+        email: originalPost.author.email
+      },
+      images: originalPost.images,
+      videos: originalPost.videos,
+      //audio: originalPost.audio,
+      gif: originalPost.gif,
+      location: originalPost.location,
+      poll: originalPost.poll,
+      isRepost: true,
+      originalPost: originalPostId
+    });
+
+    // Increment repostCount atomically
+    console.log(`Current repostCount before update: ${originalPost.repostCount}`);
+
+    const updatedOriginalPost = await Post.findByIdAndUpdate(
+      originalPostId,
+      { $inc: { repostCount: 1 } },
+      { new: true }
+    );
+
+    console.log(`Updated repostCount after update: ${updatedOriginalPost.repostCount}`);
+
+
+    if (!updatedOriginalPost) {
+      return res.status(500).json({ message: 'Failed to update original post' });
+    }
+
+    // Save the new repost
+    const createdRepost = await repost.save();
+    if (!createdRepost) {
+      return res.status(500).json({ message: 'Failed to create repost' });
+    }
+
+    // Respond with the repost and the updated original post
+    return res.status(201).json({
+      repost: createdRepost,
+      originalPostRepostCount: updatedOriginalPost.repostCount
+    });
+
+  } catch (error) {
+    console.error('Error while reposting:', error);
+    return res.status(500).json({ message: 'Server error. Please try again later.' });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
 
 

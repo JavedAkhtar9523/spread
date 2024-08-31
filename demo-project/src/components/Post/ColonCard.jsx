@@ -44,25 +44,29 @@ function ColonCard({ handleShare, postId, post }) {
       <div className='card p-3 colon-card' style={{ width: "250px" }}>
         <ul className='list-unstyled gap-3'>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleBookmark}>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' 
+            onClick={handleBookmark}>
               <i className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"} me-2 fs-6`}></i>
               <span>{isBookmarked ? "Remove Bookmark" : "Save"}</span>
             </button>
           </li>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleNotInterested}>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center'
+             onClick={handleNotInterested}>
               <i className="bi bi-x me-2 fs-5"></i>
               <span>Not Interested</span>
             </button>
           </li>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={followOrUnfollowHandler}>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' 
+            onClick={followOrUnfollowHandler}>
               <i className={`bi ${isFollowing ? "bi-person-check" : "bi-person-plus"} me-2 fs-5`}></i>
               <span>{!isFollowing ? "Follow" : "Unfollow"}</span>
             </button>
           </li>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={() => handleShare(postId)}>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' 
+            onClick={() => handleShare(postId)}>
               <i className="bi bi-link-45deg me-2 fs-5"></i>
               <span>Copy link</span>
             </button>

@@ -40,6 +40,9 @@ import {
     REFRESH_PAGE,
     ADD_REPLY_SUCCESS,
     ADD_REPLY_FAIL,
+    REPOST_REQUEST,
+    REPOST_SUCCESS,
+    REPOST_FAIL,
     ADD_REPLY_REQUEST
   } from "../constant/postConstant";
 
@@ -116,7 +119,37 @@ export const postsReducer = (state = { products: [] }, action) => {
         return state;
     }
   };
-
+  
+  
+export const repostReducer = (state = { reposts: [] }, action) => {
+    switch (action.type) {
+      case REPOST_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case REPOST_SUCCESS:
+        return { 
+          ...state, 
+          loading: false, 
+          reposts: [...state.reposts, action.payload] 
+        };
+      case REPOST_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+      default:
+        return state;
+    }
+  };
+  
   export const postReducer = (state={},action)=>{
     switch(action.type){
       case DELETE_POST_REQUEST:

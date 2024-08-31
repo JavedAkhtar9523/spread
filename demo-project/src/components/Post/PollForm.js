@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineAdd } from "react-icons/md";
 
-const PollComponent = () => {
+const PollComponent = ({ setPollData }) => {
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState(['', '']);
   const [duration, setDuration] = useState({ days: 1, hours: 0, minutes: 0 });
+
+  useEffect(() => {
+    setPollData({ question, options, duration });
+  }, [question, options, duration, setPollData]);
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -22,12 +26,6 @@ const PollComponent = () => {
 
   const handleDurationChange = (field, value) => {
     setDuration({ ...duration, [field]: parseInt(value, 10) });
-  };
-
-  const handleSubmit = () => {
-    const pollData = { question, options, duration };
-    console.log('Poll data:', pollData);
-    // Add your submission logic here
   };
 
   return (
@@ -102,7 +100,8 @@ const PollComponent = () => {
         </div>
       </div>
       <div className='text-center remove-button-container'>
-        <p onClick={removeAllOptions} className='btn text-danger remove-button border-0 border w-100'>Remove All Options</p>
+        <p onClick={removeAllOptions} 
+        className='btn text-danger remove-button border-0 border w-100'>Remove All Options</p>
       </div>
     </div>
   );

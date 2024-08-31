@@ -9,6 +9,7 @@ import {
     addReply,
     getPostReplyDetails,
     deleteCommentAndReply,
+    repostPost,
    
 } from "../controllers/postController.js";
 import { isAuthenticatedUser } from "../middlewares/auth.js";
@@ -58,6 +59,8 @@ postRoutes.delete('/comment/delete', isAuthenticatedUser,deleteCommentAndReply);
 postRoutes.post('/not-interested/:postId', isAuthenticatedUser, MarkNotInterested);
 postRoutes.post('/:postId/comment/:commentId/reply', isAuthenticatedUser, addReply);
 postRoutes.get('/reply/:postId',getPostReplyDetails)
+
+postRoutes.post('/repost/:postId', isAuthenticatedUser, repostPost);
 
 
 

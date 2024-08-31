@@ -41,6 +41,9 @@ import {
   ADD_REPLY_REQUEST,
   ADD_REPLY_SUCCESS,
   ADD_REPLY_FAIL,
+  REPOST_REQUEST,
+  REPOST_SUCCESS,
+  REPOST_FAIL,
 } from "../constant/postConstant";
 
 // Fetch all posts
@@ -66,7 +69,8 @@ export const ALLGetPosts = (id) => async (dispatch) => {
 export const createPost = (formData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_POST_REQUEST });
-    console.log(formData);
+     
+
     //'Content-Type': 'application/json',
     const config = {
       headers: {
@@ -94,6 +98,30 @@ export const createPost = (formData) => async (dispatch) => {
     });
   }
 };
+
+export const repostPost = (postId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: REPOST_REQUEST });
+    const { data } = await axiosInstance.post(`/posts/repost/${postId}`);
+
+    dispatch({
+      type: REPOST_SUCCESS,
+      payload: data,
+    });
+    toast.success('Post reposted successfully');
+  } catch (error) {
+    dispatch({
+      type: REPOST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+
+    toast.error('Failed to repost. Please try again.');
+  }
+};
+
 
 export const getPostDetails = (id) => async (dispatch) => {
   try {
@@ -345,6 +373,8 @@ export const deleteComment =
 export const resetDeleteComment = () => (dispatch) => {
   dispatch({ type: DELETE_COMMENT_RESET });
 };
+
+
 
 export const toggleRefresh = () => {
   return {

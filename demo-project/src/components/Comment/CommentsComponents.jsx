@@ -137,9 +137,6 @@ const CommentsComponent = () => {
             )}
           </div>
         </div>
-        <div className='mt-3'>
-          <CreateComment postId={postId} />
-        </div>
         <div className="mt-2 comment-container">
           <h5 className="mb-4">Comment Section</h5>
           {loading ? (
@@ -154,6 +151,9 @@ const CommentsComponent = () => {
               deleteComment={handleDeleteComment}
             />
           )}
+        </div>
+        <div className='mt-3'>
+          <CreateComment postId={postId} />
         </div>
       </div>
     </div>

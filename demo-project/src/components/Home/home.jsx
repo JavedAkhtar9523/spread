@@ -49,10 +49,10 @@ const HomePageComponent = ({ scrollableContentRef }) => {
   useEffect(() => {
     if (refresh) {
       dispatch(ALLGetPosts(user._id));
-      dispatch(toggleRefresh()); // This line can be moved based on your refresh logic
+      dispatch(toggleRefresh()); 
     }
   }, [dispatch, refresh, user._id]);
-
+  const sortedPosts = posts?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return (
     <div className="container-fluid " style={{ backgroundColor: "whitesmoke" }}>
       <div className="row">
@@ -99,8 +99,8 @@ const HomePageComponent = ({ scrollableContentRef }) => {
           <div className="home-center">
             {loading ? (
               <Loading />
-            ) : posts?.length > 0 ? (
-              posts?.map((post) => (
+            ) : sortedPosts?.length > 0 ? (
+              sortedPosts?.map((post) => (
                 <PostHome onRepost={handleRepost} key={post._id} posts={post} />
               ))
             ) : (
