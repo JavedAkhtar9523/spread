@@ -86,12 +86,7 @@
     font-weight: 400;
     text-transform: capitalize;
     position: relative;
-    .see{
-        color: blueviolet;
-        text-decoration: none;
-        font-size: 1rem;
-        margin-left: 1rem;
-    }
+    
 }
 .img-thumbnails{
     display: flex;

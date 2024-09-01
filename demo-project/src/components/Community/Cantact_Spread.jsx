@@ -4,9 +4,11 @@ import CommunityComponent from './community';
 import { NavLink } from "react-router-dom";
 import CantactProfile from './ContactProfile';
 import { initialProfiles } from "./../Profile/profile";
+import { useSelector } from "react-redux";
 
 const Cantact_Spread = ({ scrollableContentRef }) => {
     const title = "Top Spreads";
+    const { users } = useSelector((state) => state.allUsers);
     const [profiles, setProfiles] = useState(initialProfiles);
 
     const handleFollowToggle = (id, isFollowing) => {
@@ -53,7 +55,8 @@ const Cantact_Spread = ({ scrollableContentRef }) => {
                 </div>
                 <div className="col-3">
                     <div className="main-left d-flex flex-column align-items-center" style={{ marginTop: "1rem" }}>
-                        <MatchCard title={title} profiles={profiles} onFollowToggle={handleFollowToggle} />
+                    
+                        <MatchCard data={users.other} title={title} />
                         <div>
                         </div>
                     </div>

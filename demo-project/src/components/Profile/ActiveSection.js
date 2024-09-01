@@ -67,6 +67,7 @@
 
 import React, { useState } from "react";
 import Card from "../../pages/Card/Card";
+import './profile.css';
 
 const ActivitySection = ({ activities }) => {
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -94,48 +95,57 @@ const ActivitySection = ({ activities }) => {
   return (
     <div className="container-fluid">
       <div className="text-start m-1 ps-4 fs-4 fw-bolder Activities">
-        <h3 className="fs-5 fw-semibold">Activities</h3>
+       
       </div>
       {/* Filter buttons */}
-      <div className="d-flex flex-wrap my-3 ms-1">
+      <div className="d-flex justify-content-center flex-wrap my-3 ms-1">
         <button
-          style={{ width: "23%" }}
-          className={`btn btn-outline-secondary btn-sm m-1 ${
+          style={{ width: "12%" }}
+          className={`btn  btn-sm m-1 ${
             selectedFilter === "all" ? "active" : ""
           }`}
           onClick={() => setSelectedFilter("all")}
         >
-          All
+          Post
         </button>
         <button
-          style={{ width: "23%" }}
-          className={`btn btn-outline-secondary btn-sm m-1 ${
+          style={{ width: "12%" }}
+          className={`btn  btn-sm m-1 ${
             selectedFilter === "nature" ? "active" : ""
           }`}
           onClick={() => setSelectedFilter("nature")}
         >
-          Post
+          Repost
         </button>
         <button
-          style={{ width: "23%" }}
-          className={`btn btn-outline-secondary btn-sm m-1 ${
+          style={{ width: "12%" }}
+          className={`btn  btn-sm m-1 ${
             selectedFilter === "animals" ? "active" : ""
           }`}
           onClick={() => setSelectedFilter("animals")}
         >
-          Repost
+          Reply
         </button>
         <button
-          style={{ width: "23%" }}
-          className={`btn btn-outline-secondary btn-sm m-1 ${
+          style={{ width: "12%" }}
+          className={`btn  btn-sm m-1 ${
             selectedFilter === "show" ? "active" : ""
           }`}
           onClick={() => setSelectedFilter("show")}
         >
-          Show
+          Shorts
+        </button>
+        <button
+          style={{ width: "12%" }}
+          className={`btn  btn-sm m-1 ${
+            selectedFilter === "show" ? "active" : ""
+          }`}
+          onClick={() => setSelectedFilter("show")}
+        >
+          Taagged
         </button>
       </div>
-
+        
       {selectedFilter === "all" ? (
         <div className="position-relative">
           <div className="carousel-inner">

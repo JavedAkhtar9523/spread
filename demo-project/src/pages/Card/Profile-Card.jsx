@@ -5,6 +5,13 @@ import { NavLink } from "react-router-dom";
 import CreatePost from "../../components/Post/Create-Post/CreatePost.jsx";
 import EventCard from "../../components/Event/EventCard";
 import { BsFillCheckCircleFill, BsPlusCircleDotted } from "react-icons/bs";
+import { PiDotsThreeCircleVertical } from "react-icons/pi";
+import { FaMicrophone } from "react-icons/fa6";
+import { FaRegComment } from "react-icons/fa6";
+import { IoSearchSharp } from "react-icons/io5";
+import { GoHome } from "react-icons/go";
+import { RiCalendarEventFill } from "react-icons/ri";
+import { BiSolidUserAccount } from "react-icons/bi";
 import "./profile.css";
 import { useSelector } from "react-redux";
 
@@ -13,7 +20,7 @@ const ProfileCard = () => {
 
   return (
     <div className="profile-container">
-      <div className="card m-3">
+      <div className="card m-3" style={{ height: "88vh" }}>
         <div className="card-headers">
           <div className="background-imag">
             <img
@@ -48,46 +55,30 @@ const ProfileCard = () => {
                   />
                 </div>
               </NavLink>
-              <div className="badge text-bg-light">
-                <span className="text-muted" style={{ fontSize: "0.6rem" }}>
-                  {user?.email}
+              <div className="badge text-start ms-3 text-bg-light">
+                <span className="me-1" style={{ fontSize: "0.6rem" }}>
+                  {user?.email} 
                 </span>
               </div>
             </div>
           </div>
         </div>
         <div className="card-body">
-          <div className="d-flex position-relative justify-content-center align-items-center w-100">
-            <button
-              className="btn btn-primary btn-sm p-1 w-75 rounded rounded-1 mt-1 mb-1"
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#switchUserModal"
-              style={{ height: "30px" }}
-            >
-              Switch
-            </button>
-          </div>
-          <div>
+          <div >
+            <div className="text-center">
             <p
               className="text-muted"
               style={{
-                fontSize: "0.8rem",
-                marginBottom: "-1px",
-                textTransform: "capitalize",
+                fontSize: "0.6rem",
+                marginBottom: "-1px",   
               }}
             >
               {user?.bio}
             </p>
-            <div className="badge text-bg-light">
-              <span className="text-muted" style={{ fontSize: "0.6rem" }}>
-                {user?.username}
-              </span>
             </div>
-          </div>
-          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex mt-3 justify-content-evenly align-items-center">
             <div>
-              <IoMdWifi className="icons me-1 text-primary" />
+              <IoMdWifi className="icons me-3 text-primary" />
               <span
                 style={{ fontSize: "0.9rem", fontWeight: "400", color: "gray" }}
               >
@@ -103,87 +94,101 @@ const ProfileCard = () => {
                 checked
               />
             </div>
+          </div>           
           </div>
-
           <div className="mt-4 profileSidebar">
             <nav>
               <ul>
                 <li>
                   <NavLink
                     to="/home"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-house-door-fill b-icon"></span>
+                    <GoHome className="b-icon fs-3"/>
                     Home
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/explore"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-search b-icon"></span>Explore
+                    <IoSearchSharp className="b-icon fs-3"/>Explore
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/message"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-chat-dots b-icon"></span>Messages
+                    
+                    <FaRegComment className="b-icon fs-3" />Messages
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/create-post"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-person-video2 b-icon"></span>Spread
+
+                    <BiSolidUserAccount className="b-icon fs-3"/> 
                     Shorts
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="#"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    to="/spread-live"
+                    
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-person-video2 b-icon"></span>Spread
-                    Live
+                    <FaMicrophone className=" b-icon fs-3" /> Go Live
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="#"
-                    style={{ fontWeight: "bold", fontSize: "15px" }}
+                    
                     data-bs-toggle="modal"
                     data-bs-target="#createEvent"
                     className={({ isActive }) =>
                       isActive ? "active-link" : ""
                     }
                   >
-                    <span className="bi bi-calendar2-event b-icon"></span>Event
+                    <RiCalendarEventFill className=" b-icon fs-3" />
+                    Event
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="#"
+                    
+                    className={({ isActive }) =>
+                      isActive ? "active-link" : ""
+                    }
+                  >
+                    <PiDotsThreeCircleVertical className=" b-icon fs-3 " />Go
+                    More
                   </NavLink>
                 </li>
               </ul>
               <div className="justify-content-center align-items-center d-flex">
                 <div className="dropdown">
                   <button
-                    className="btn btn-primary rounded-0"
+                    className="create-button" 
                     type="button"
                     data-bs-toggle="modal"
                     data-bs-target="#createModal"
@@ -219,7 +224,7 @@ const ProfileCard = () => {
               aria-labelledby="switchUserModalLabel"
               aria-hidden="true"
             >
-              <SwitchUser user={user} />
+             
             </div>
           </div>
         </div>

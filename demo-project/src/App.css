@@ -1,5 +1,9 @@
+/* { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Lucida Grande"; } */
+
 h3,h2,h4,h5{
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "HelveticaNeue-Light";
+  /* font-family: Arial; */
 }
   a{
     text-decoration: none;
