@@ -4,11 +4,8 @@
     outline: none;
 }
 
-.colon-card button:hover {
-   
-}
 .About_this_post{
-    width: 400px;
+    width: 100%;
     border: none;
     border-radius: 5px;
 
@@ -20,3 +17,11 @@
     top: 5%;
     left: -150%;
 }
+
+.report_home .modal .modal-backdrop {
+    --bs-backdrop-opacity: 0.8;
+}
+.blur-background {
+    filter: blur(10px);
+    transition: filter 0.3s ease-in-out;
+  }

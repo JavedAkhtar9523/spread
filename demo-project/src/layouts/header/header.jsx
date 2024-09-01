@@ -194,7 +194,7 @@ const Header = ({ toggleOpen }) => {
     <header className="d-flex justify-content-between p-2 mt-2 header">
       <nav className="d-flex align-items-center">
         <div
-          className="logo ms-4 me-3"
+          className="logo ms-5 me-"
           onClick={toggleOpen}
           ref={notificationRef}
         >
@@ -209,14 +209,14 @@ const Header = ({ toggleOpen }) => {
         </div>
         <div className="search-box" ref={searchBoxRef}>
           <form className="d-flex position-relative">
-            <span className="search-icon1 bi bi-search"></span>
+            {/* <span className="search-icon1 bi bi-search"></span> */}
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
+              placeholder="Search"
               className="search-input1"
-              style={{ paddingLeft: "22px" }}
+              style={{ }}
             />
           </form>
           {showSearchResults && (

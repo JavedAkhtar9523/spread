@@ -6,7 +6,7 @@ const Card = ({ title, description, image }) => {
     const previewtext = 50;
 
     return (
-        <div className="card m-1" style={{ width: "222px" }}>
+        <div className="card m-1" style={{ width: "235px" }}>
             <img src={image} alt={title} className="card-img-top" height="200" />
             <div className="card-body" style={{ fontSize: "1rem", textAlign: "left" }}>
                 <p className="text-muted " style={{fontSize: ".8rem"}}>

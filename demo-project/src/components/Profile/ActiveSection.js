@@ -68,7 +68,8 @@
 import React, { useState } from "react";
 import Card from "../../pages/Card/Card";
 import './profile.css';
-
+// import "./carosuel.css";
+import './../carosuel/carosuel.css';
 const ActivitySection = ({ activities }) => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);

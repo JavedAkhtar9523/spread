@@ -61,7 +61,7 @@ function PostHome({ posts }) {
     setColon(!colon);
   };
 
-  useOutsideClick(colonRef, () => setColon(false));
+  // useOutsideClick(colonRef, () => setColon(false));
 
   const handleShare = () => {
     const url = `${window.location.origin}/post/${posts._id}`;

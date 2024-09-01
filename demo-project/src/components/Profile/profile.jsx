@@ -16,7 +16,10 @@ import ActivitySection from "./ActiveSection";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../actions/userActions";
-
+import { FaMicrophone } from "react-icons/fa6";
+import { GoFileMedia } from "react-icons/go";
+import { LuCircleDashed } from "react-icons/lu";
+import TakeATour from './../../pages/Card/TakeATour.js';
 const featuredPosts = [
   {
     category: "science",
@@ -179,10 +182,9 @@ const Profile = ({ scrollableContentRef }) => {
             <NetworkCard />
           </div>
         </div> */}
-        <div
-          className="col-8 bg-white mt-4 scrollable-content "
+        <div  className="col-8  mt-4 scrollable-content "
           ref={scrollableContentRef} >
-          <main className="profile-container">
+          <main className="profile-container bg-white">
             <div className="cover-img">
               <img
                 src={
@@ -193,7 +195,7 @@ const Profile = ({ scrollableContentRef }) => {
               <span><IoIosSettings className="setting-icon" /></span>
               {/* <span className="bi bi-bi-gear-fill"></span> */}
             </div>
-            <div className="row">
+            <div className="row" >
               <div className="col-3">
                 <div className="avatar-box ms-2">
                   <div className="avatar">
@@ -336,8 +338,8 @@ const Profile = ({ scrollableContentRef }) => {
               </div>
             </div>
           </main>
-          <hr />
-          <div className="chart">         
+
+          <div className="chart mt-2 bg-white">         
                 <div className="chart-list">
                   <h4>Reach</h4>
                   <h4>72</h4>
@@ -350,15 +352,50 @@ const Profile = ({ scrollableContentRef }) => {
                  
                  
                 </div>
-                <div className=" ms-5" style={{width: "350px", height:"350px"}}>
+                <div className=" mt-2 ms-5" style={{width: "350px", height:"350px"}}>
               <ChartComponent />
               <div className="text-end mt-4 ">
                 <button className="text-white bg-primary border-0 px-2 rounded-1">More Insights</button>
               </div>
               </div>
           </div>
-          <hr />
-          <div className="feature d-flex justify-content-left flex-column text-align-left text-left">
+
+          <div className="generates_post mt-2 p-3 bg-white">
+            <div className="d-flex ">
+              <div>
+              <img
+                src={  user?.coverImage[0]?.url || "https://live.staticflickr.com/65535/49627006528_4eabfb3cdd_z.jpg" }
+                className="rounded-circle" width="75" height="75" />
+              </div>
+              <div className="w-100">
+                <form className="d-flex flex-column">
+                  
+                  <div className="position-relative">
+                  <input type="text" placeholder="Generate Post" className="w-100 mt-2 ms-2 border-0 ps-3 text-dark rounded-pill" style={{height: "3rem", background: "#e5e6e6"}} />
+                  <img src="Ai.jpg" className="border-0 rounded-circle position-absolute top-0 end-0 mt-2 pt-1 me-2" width="35" height="35" />
+                  <hr className="border-bottom border-3 rounded-3" style={{ borderColor: "blue" }} />
+                  </div>
+                  <div className="d-flex justify-content-around  mt-2">
+                      <div>
+                       <button className="border border-0 rounded-3 bg-white"> <FaMicrophone className="text-danger fw-bolder fs-4 me-1" /> Go Live</button>
+                      </div>
+                      
+                      <div>
+                        <label for="formFile" class="form-label"> <GoFileMedia className="fw-bolder fs-4 me-1"/><span className="fs-6 mt-2 ms-1">Media</span> </label>
+                        <input class="form-control d-none" type="file" id="formFile" />
+                      </div>
+                      <div>
+                        <LuCircleDashed className="fw-bolder fs-4 me-1" /> Add Story
+                      </div>
+                      
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="feature mt-2 d-flex justify-content-left bg-white flex-column text-align-left text-left">
             {/* <div className="ms-2">
               <select
                 value={selectedCategory}
@@ -372,7 +409,7 @@ const Profile = ({ scrollableContentRef }) => {
                 <option value="science">Science</option>
               </select>
             </div> */}
-            <h5 className="ms-3">Featured Post</h5>
+            <h5 className="ms-3 pt-2">Featured Post</h5>
             <div className="mt-2 d-flex ms-3 align-items-center">
               <Carousel posts={featuredPosts} category={selectedCategory} />
             </div>
@@ -382,13 +419,15 @@ const Profile = ({ scrollableContentRef }) => {
             <ActivitySection activities={featuredPosts} />
           </div>
         </div>
+      
         <div className="col-4">
           <div
             className="main-left d-flex flex-column align-items-center"
             style={{ marginTop: "1rem" }}
           >
-            <MatchCard data={users.other} title={title} />
             <Spread_news />
+            <MatchCard data={users.other} title="Top Search" />
+            <TakeATour />
             <div>
               <Terms_Service />
             </div>

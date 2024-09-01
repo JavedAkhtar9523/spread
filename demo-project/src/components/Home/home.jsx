@@ -63,7 +63,7 @@ const HomePageComponent = ({ scrollableContentRef }) => {
         </div>
         <div className="col-6 scrollable-content" ref={scrollableContentRef}>
           <div
-            className="d-flex "
+            className="d-flex mt-2 "
             style={{ justifyContent: "space-around" }}
           >
             <div onClick={StoryClick} className="position-relative">
@@ -117,6 +117,12 @@ const HomePageComponent = ({ scrollableContentRef }) => {
           <div className="home-right d-flex flex-column justify-content-center align-items-center">
             <FollowCard data={users?.other} />
             <Spread_News />
+            <div className="mt-5 mx-3 px-3  home_right_bottom_text ">
+              <h6>About Help Press API </h6>
+              <h6>Jobs Privacy Terms Locations</h6>
+              <h6>Language Spreads Verified Spreads Business Solution</h6>
+              <h6>&copy; 2024 AmbiSpine Technologies</h6>
+            </div>
           </div>
         </div>
       </div>

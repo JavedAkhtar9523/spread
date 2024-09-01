@@ -161,3 +161,11 @@ ul li span{
     z-index: 10;
 }
   
+.home_right_bottom_text{
+    text-align: center;
+    font-family: "Roboto", sans-serif;  
+    h6{
+        font-size: 12px;
+        font-weight: 400;
+    }
+}
