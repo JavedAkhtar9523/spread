@@ -44,7 +44,9 @@ const ProfileCards = ({ profile }) => {
 
 const FollowCard = ({ data }) => {
   const [expands, setExpands] = useState(false);
+
   const itemsToShow = expands ? data : data?.slice(0, 3);
+
 
   return (
     <div className="follow-container" style={{ width: "90%" }}>

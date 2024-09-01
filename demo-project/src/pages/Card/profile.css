@@ -11,7 +11,8 @@
       height: 100px;
   }
   .card .logos {
-      margin-top: -65px;
+      margin-top: -70px;
+      margin-left: 10px;
   }
   .card .logos img{ 
       width: 70px;
@@ -33,7 +34,7 @@
       }
   }
   ul li{
-      margin-bottom: 0.3rem;
+      
       font-family: "HelveticaNeue-Light";
   }
 

@@ -11,9 +11,8 @@ import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import { BiBarChart } from "react-icons/bi";
 import { CiFlag1 } from "react-icons/ci";
 import { SlCalender } from "react-icons/sl";
-import Report from './Report'
+import ReportHome from './ReportHome';
 import About_this_post from './About_this_post'
-import CreatePost from './Create-Post/CreatePost.jsx'
 import "./post.css"
 
 function ColonCard({ handleShare, postId, post }) {
@@ -110,29 +109,7 @@ function ColonCard({ handleShare, postId, post }) {
             </button>
           
           </li>
-          <li>
-          <button
-                    className="text-dark" 
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#createModal"
-                  >
-                    Create Post <i className="bi bi-plus"></i>
-                  </button>
-          </li>
-
-          <li className='mb-2'>          
           
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center'
-
-             data-bs-toggle="modal" data-bs-target="#reportModal" >    
-
-              <CiFlag1 className='fs-5 me-2' />
-              <span>Report post</span>
-            </button>
-          </li>
-          
-
           <li className='mb-2'>
             <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleBookmark}>
               <i className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"} me-2 fs-6`}></i>
@@ -140,37 +117,23 @@ function ColonCard({ handleShare, postId, post }) {
             </button>
           </li>
         
-       <li className="mb-2 position-relative">
-      <button  className="fw-normal fs-6 text-secondary d-flex align-items-center" onClick={handleAbout}>
-        <HiOutlineExclamationCircle className="me-2 fs-5" />
-        <span>About This Post</span>
-      </button>
-    </li>
-    {isAbout && (
-        <div className="home_About_colon">
-          <About_this_post />
-          {/* Second Component - Close Button */}
-          <div className="text-center pb-2">
-            <button onClick={handleAbout}>Close</button>
-          </div>
-        </div>
-      )}
+       
+    <li className='mb-2'> <About_this_post /></li>  
+      {/* <li>
+        <button
+          className="fw-normal fs-6 text-secondary d-flex align-items-center"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#reportHome"
+        >
+          <CiFlag1 className="fs-5 me-2" />
+          <span>Report post</span>
+        </button>
+      </li> */}
+      <li className='mb-2'><ReportHome /></li>
         </ul>
-        {/* <div
-              className="modal fade"
-              id="createModal"
-              tabIndex="-1"
-              aria-labelledby="createModalLabel"
-              aria-hidden="true"
-            >
-              <CreatePost />
-            </div> */}
-        <div className="modal fade" 
-        id="reportModal" tabIndex="-1" 
-        aria-labelledby="reportModalLabel" 
-        aria-hidden="true">
-          <Report />
-          </div>                
+          
+            
       </div>
     </Fragment>
   );

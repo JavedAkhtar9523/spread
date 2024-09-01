@@ -14,6 +14,7 @@ import { MdOutlineFormatListBulleted } from "react-icons/md";
 import React, { useState, useRef } from 'react';
 import './EventCard.css';
 import { useSelector } from "react-redux";
+
 const EventCard = () => {
   const {user} = useSelector((state) => state.user);
   const [date, setDate] = useState("16 jun 2024");

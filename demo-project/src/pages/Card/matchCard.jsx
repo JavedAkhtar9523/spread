@@ -87,12 +87,12 @@ const ProfileCard = ({ profile }) => {
 
 const MatchCard = ({ title, data }) => {
   const [expand, setExpand] = useState(false);
-  const previewCardCount = 2;
+  const previewCardCount = 3;
 
   return (
     <div className="match-container" style={{ width: "90%" }}>
       <div className="card p-1 border-0" style={{ width: "100%" }}>
-        <h6 className="card-title">{title}</h6>
+        <h6 className="card-title p-2 fw-bolder text-secondary">{title}</h6>
         {expand
           ? data.map((profile) => (
               <ProfileCard key={profile._id} profile={profile} />

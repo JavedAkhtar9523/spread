@@ -35,19 +35,19 @@ const Spread_News = () => {
         <ul
           style={{
             textAlign: "left",
-            fontSize: "13px",
+            fontSize: "15px",
             fontWeight: "500",
             color: "secondary",
           }}
         >
           {showMore
             ? textArray.map((item, index) => (
-                <li key={index} className="mb-2">
+                <li key={index} className="mb-2 fs-6">
                   {item}
                 </li>
               ))
             : textArray.slice(0, previewCount).map((item, index) => (
-                <li key={index} className="mb-2">
+                <li key={index} className="mb-2 fs-6">
                   {item}...
                 </li>
               ))}

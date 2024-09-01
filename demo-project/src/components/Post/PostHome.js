@@ -63,11 +63,6 @@ function PostHome({ posts }) {
   };
   const [currentPostId, setCurrentPostId] = useState(null);
 
-  const handleClick = (postId) => {
-    setCurrentPostId(postId);
-  };
-  console.log(currentPostId);
-  useOutsideClick(colonRef, () => setColon(false));
 
   const handleShare = () => {
     const url = `${window.location.origin}/post/${posts._id}`;

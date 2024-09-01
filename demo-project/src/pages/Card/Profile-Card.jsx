@@ -14,6 +14,7 @@ import { RiCalendarEventFill } from "react-icons/ri";
 import { BiSolidUserAccount } from "react-icons/bi";
 import "./profile.css";
 import { useSelector } from "react-redux";
+import ReportHome from './../../components/Post/ReportHome.jsx';
 
 const ProfileCard = () => {
   const { user } = useSelector((state) => state.user);
@@ -31,7 +32,7 @@ const ProfileCard = () => {
               alt="Background"
             />
           </div>
-          <div className="profile-headings d-flex p-2">
+          <div className="profile-headings d-flex ps-2">
             <div className="logos">
               <img
                 src={
@@ -45,7 +46,7 @@ const ProfileCard = () => {
             </div>
             <div className="titles">
               <NavLink to="/profile" className="text-decoration-none">
-                <div className="justify-content-center align-items-center d-flex gap-3">
+                <div className="justify-content-start ms-1 align-items-center mt-1 d-flex ">
                   <h4 className="fs-6 text-secondary">
                     {user?.firstName} {user?.lastName}
                   </h4>
@@ -55,10 +56,17 @@ const ProfileCard = () => {
                   />
                 </div>
               </NavLink>
-              <div className="badge text-start ms-3 text-bg-light">
-                <span className="me-1" style={{ fontSize: "0.6rem" }}>
+              <div className="d-flex justify-content-start align-item-start ">
+                <p style={{marginTop:"-10px", marginLeft: "-10px"}}>
+                <span className="me-1 text-bg-light" style={{ fontSize: "0.6rem" }}>
                   {user?.email} 
                 </span>
+                <span className="ms-1 text-bg-light" style={{ fontSize: "0.6rem" }}>
+                  Entrepreneur             
+                </span>
+                </p>
+              
+                
               </div>
             </div>
           </div>
@@ -96,7 +104,7 @@ const ProfileCard = () => {
             </div>
           </div>           
           </div>
-          <div className="mt-4 profileSidebar">
+          <div className="mt-3 profileSidebar">
             <nav>
               <ul>
                 <li>
