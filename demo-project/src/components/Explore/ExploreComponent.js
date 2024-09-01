@@ -7,6 +7,8 @@ import StoryVideoCard from './../../pages/Card/storyvideocard';
 import VideoCard from './../../pages/Card/videocard';
 import "./../../pages/Card/videocard.css";
 import AudioCard from "./../../pages/Card/AudioCard";
+import { useSelector } from 'react-redux';
+import ReelsFeed from '../reals/ReelsFeed';
 
 const btns = [
   { id: 1, title: "Trending" },

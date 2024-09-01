@@ -108,6 +108,7 @@ import ChangePassword from "./ChangePassword";
 import defaultBanner from "../../assets/8.jpg";
 import defaultAvatar from "../../assets/admin.png";
 
+
 const ProfileInfo = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();

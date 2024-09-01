@@ -5,10 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllComments, addReply, getPostDetails, deleteComment, resetDeleteComment, clearErrors } from "../../actions/postAction"; 
 import { NavLink, useParams } from "react-router-dom";
 import { followOrUnfollowUser } from "../../actions/userActions";
-import CreateComment from "../Post/Comment/CreateComent";
+//import CreateComment from "../Post/Comment/CreateComent";
+import {IoIosShareAlt} from 'react-icons/io';
 import {toast } from 'react-toastify';
 import { dislikeComment, dislikeReply, likeComment, likeReply } from "../../actions/commentAction";
-
+import CreateComment from "./CreateComment";
+import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa";
+import { BiRepost } from "react-icons/bi";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 const CommentsComponent = () => {
   const { id: postId } = useParams();
   const dispatch = useDispatch();
@@ -20,7 +24,8 @@ const CommentsComponent = () => {
   const currentUserId = currentUser?._id;
   const [isFollowing, setIsFollowing] = useState(currentUser?.following.includes(post?.postedBy?._id));
   const [replyId, setReplyId] = useState(null);
-  
+ 
+
   useEffect(() => {
     dispatch(getAllComments(postId));
     dispatch(getPostDetails(postId));
@@ -38,6 +43,7 @@ const CommentsComponent = () => {
   const handleAddReply = (parentId, replyText) => {
     dispatch(addReply(postId, parentId, replyText));
   };
+ 
 
 
   const handleUpdateLikes = (commentId, type) => {
@@ -53,6 +59,8 @@ const CommentsComponent = () => {
       });
     }
   };
+
+  const isLiked = post?.likes?.includes(currentUserId);
 
   // const handleUpdateLikes = (commentId, replyId, type) => {
   //   if (replyId) {
@@ -107,21 +115,64 @@ const CommentsComponent = () => {
   };
 
   return (
-    <div className='container-fluid'>
-    <div className="container p-4" style={{ width: "1000px", background: "#D9E4E9", height: "100vh" }}>
-    <div className='row'>
-      <div className='col-5 border border-1 rounded-0 p-2' style={{ width: "400px", height: "80vh" }}>
-        {post?.images && post.images.length > 0 && (
-          <img src={post.images[0].url} alt="Content" width="100%" height="100%" />
-        )}
-        {post?.content && <p className='mt-2 text-muted' style={{ fontSize: "0.8rem", fontFamily: "cursive" }}>{post.content}</p>}
+    <div className='container-fluid comment-container-layer'>
+    <div className="container p-4 custom-container ">
+    <div className='row d-flex justify-center align-items-center'>
+    {post?.images && post?.images?.length > 0 && (
+      <div className='col-5 comment-image'>
+       <div className="thumbnailBox"  style={{ width: "400px", height: "70vh" }}>
+       <img src={post.images[0].url}  className='border border-1 rounded-4'
+        alt="Content" width="100%" height="100%" />
+       </div>
+       <div className="post-actions">
+            <button
+              className={`action-btn like-btn ${isLiked ? "liked" : ""}`}
+            >
+              {isLiked ? <FaHeart /> : <FaRegHeart />}
+              <span className="action-count">{post?.likes?.length}</span>
+            </button>
+
+            <button
+              className="action-btn comment-btn"
+            >
+              <FaRegComment />
+              <span className="action-count">{post?.comments?.length}</span>
+            </button>
+            <button className="action-btn repost-btn"
+            >
+              <BiRepost />
+              <span className="action-count">
+                {post?.repostCount}
+              </span>
+            </button>
+          </div>
       </div>
-      <div className='col-6 ps-4 '>
-        <div className='user-container d-flex justify-content-between p-1'>
-          <img src={post?.author?.avatar || post?.postedBy?.avatar} alt="Author" width="60" height="60" className='img-fluid rounded-circle' />
-          <div>
-            <h5>{post?.author?.name || post?.postedBy?.name || 'Unknown Author'}</h5>
-            <p className='text-muted'>{post?.author?.email || post?.postedBy?.email || 'Unknown Email'}</p>
+    )}
+
+      <div className='col-6  comment-profile'>
+        <div className='user-container d-flex justify-content-between ps-4 p-1'>
+          <img src={post?.author?.avatar || post?.postedBy?.avatar} alt="Author" width="50" height="50" 
+          className='img-fluid rounded-circle' />
+          <div className="gap-0">
+            <div className=" d-flex justify-content-center align-items-center gap-1">
+            <h5 className="text-normal">{post?.author?.name || post?.postedBy?.name || 'Unknown Author'}</h5>
+            <IoIosCheckmarkCircle className="text-primary"/>
+            <span className="text-muted" style={{ fontSize: "0.8rem", fontFamily: "cursive" }}>
+  {currentUser?.createdAt
+    ? new Date(currentUser.createdAt).toLocaleString('en-US', {
+      hour: '2-digit', 
+      minute: '2-digit',
+        month: 'short',   
+        day: 'numeric',   
+  
+      })
+    : ""}
+</span>
+
+            </div>
+            <span class="badge rounded-pill bg-light text-secondary text-muted">
+              {post?.author?.email || post?.postedBy?.email || 'Unknown Email'}</span>
+            <span class="badge rounded-pill bg-light text-secondary text-muted px-2">{post?.author?.username}</span>
           </div>
           <div>
             {currentUserId === post?.postedBy?._id ? (
@@ -137,8 +188,9 @@ const CommentsComponent = () => {
             )}
           </div>
         </div>
-        <div className="mt-2 comment-container">
-          <h5 className="mb-4">Comment Section</h5>
+        <div className="mt-2 comment-container ps-4">
+        {post?.content && <p className='mt-2 text-muted' style={{ fontSize: "0.8rem", fontFamily: "cursive" }}>
+          {post.content}</p>}
           {loading ? (
             <p>Loading comments...</p>
           ) : error ? (
@@ -152,8 +204,9 @@ const CommentsComponent = () => {
             />
           )}
         </div>
-        <div className='mt-3'>
-          <CreateComment postId={postId} />
+        <div className=''>
+          {/* <CreateComment postId={postId} /> */}
+          <CreateComment postId={postId}/>
         </div>
       </div>
     </div>

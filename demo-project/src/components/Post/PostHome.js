@@ -4,6 +4,7 @@ import { BsFillCheckCircleFill, BsPlusCircleDotted } from "react-icons/bs";
 import { BiDotsVerticalRounded, BiComment } from "react-icons/bi";
 import { MdOutlineThumbUp, MdShare } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
+import {IoIosShareAlt} from 'react-icons/io';
 import TimeAgo from "react-timeago";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -25,6 +26,7 @@ import CreateComent from "./Comment/CreateComent.jsx";
 import ColonCard from "./ColonCard";
 import { useOutsideClick } from "../../utlis/useOutsideClick.js";
 import { toast } from "react-toastify";
+import PollCard from "./PollCard.jsx";
 // import Comment from "./Comment";
 
 function PostHome({ posts }) {
