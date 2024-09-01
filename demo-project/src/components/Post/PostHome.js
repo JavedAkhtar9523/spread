@@ -101,7 +101,7 @@ function PostHome({ posts }) {
   return (
     <div
       className="card w-100 h p-2 bg-white mb-2"
-      style={{ border: "1px solid #ececec" }}
+      style={{ border: "1px solid #ececec", width: "60%" }}
     >
       <div className="profile-contents mt-4">
         <div className="profile-headings">
@@ -137,7 +137,7 @@ function PostHome({ posts }) {
                 //   zIndex: "1000",
                 //   marginTop: "-3.6rem",
                 // }}
-                style={{top: "-32px", right: "-8px", zIndex: "1000"}}
+                style={{ top: "-32px", right: "-8px", zIndex: "1000" }}
               >
                 <ColonCard
                   handleShare={handleShare}
