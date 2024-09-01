@@ -6,7 +6,7 @@ import { clearErrors, createPost } from '../../../actions/postAction';
 import { BsEmojiSmileFill, BsFillPersonFill } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
 import { PiFileAudioLight, PiFileVideoLight } from "react-icons/pi";
-import "./createPost.css";
+import "./createPost.css"
 import { NEW_POST_RESET } from '../../../constant/postConstant';
 import { useNavigate } from "react-router-dom";
 import PollComponent from '../PollForm';
@@ -20,9 +20,11 @@ const CreatePost = () => {
   const [videos, setVideo] = useState([]);
   const [videosPreview, setVideoPreview] = useState([]);
   const [audio, setAudio] = useState(null);
+  const [pollData, setPollData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, success } = useSelector((state) => state.newPost);
+  const { user } = useSelector((state) => state.user);
 
  
 // Handle audio changes
@@ -64,10 +66,11 @@ const handleAudioChange = (e) => {
     });
     videos.forEach(file => formData.append("videos", file));
     if (audio) formData.append("audio", audio);
+    if (pollData) formData.append("poll", JSON.stringify(pollData));
     
     dispatch(createPost(formData));
   };
-  
+  console.log(pollData); 
   const addEmoji = (e) => {
     const sym = e.unified.split("-");
     const codeArray = sym.map(el => "0x" + el);
@@ -133,7 +136,8 @@ const handleAudioChange = (e) => {
           >
             <div className="mb-3 d-flex">
               <div className="logos mt-1">
-                <img src="https://live.staticflickr.com/65535/49627006528_4eabfb3cdd_z.jpg" style={{ width: "60px", height: "60px" }} alt="Profile"/>
+                <img src={ user?.avatar[0]?.url ||"https://live.staticflickr.com/65535/49627006528_4eabfb3cdd_z.jpg"}
+                 style={{ width: "60px", height: "60px" }} alt="Profile"/>
               </div>
               <div className='ms-4'>
                 <textarea 
@@ -219,7 +223,7 @@ const handleAudioChange = (e) => {
               </div>
             </div>
            { Poll &&  <div className='d-flex justify-content-center align-item-center'>
-            <PollComponent/>
+            <PollComponent setPollData={setPollData}/>
             </div>}
             <div className="mb-3 text-center">
               <button type="submit" className="btn btn-primary rounded-0 w-25" disabled={loading}>

@@ -7,7 +7,9 @@ import StoryVideoCard from './../../pages/Card/storyvideocard';
 import VideoCard from './../../pages/Card/videocard';
 import "./../../pages/Card/videocard.css";
 import AudioCard from "./../../pages/Card/AudioCard";
-import ReelsFeed from './../reals/ReelsFeed.jsx';
+import { useSelector } from 'react-redux';
+import ReelsFeed from '../reals/ReelsFeed';
+
 const btns = [
   { id: 1, title: "Trending" },
   { id: 2, title: "Reels" },
@@ -18,7 +20,7 @@ const btns = [
 
 const ExploreComponent = ({ scrollableContentRef }) => {
   const [activeButton, setActiveButton] = useState('Trending');
-
+  const { users } = useSelector((state) => state.allUsers);
   return (
     <Fragment>
       <div className="container-fluid bg-light">
@@ -154,7 +156,7 @@ const ExploreComponent = ({ scrollableContentRef }) => {
           </div>
 
           <div className="col-3">
-            <Main_Left />
+            <Main_Left data={users?.other}/>
           </div>
         </div>
       </div>

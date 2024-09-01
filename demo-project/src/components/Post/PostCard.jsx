@@ -168,7 +168,7 @@ function PostCard({ onRepost }) {
             </div>
             <div className="s-icon">
               <PiArrowsClockwiseBold className="icons" onClick={handleRepost} />
-              <span>30k</span>
+              <span>30k </span>
             </div>
           </div>
           <div className="share-icons">

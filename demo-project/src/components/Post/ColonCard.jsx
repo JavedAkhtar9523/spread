@@ -64,14 +64,21 @@ function ColonCard({ handleShare, postId, post }) {
     <Fragment>
       <div className='card p-3 colon-card' style={{ width: "300px" }}>
         <ul className='list-unstyled gap-3'>
-        <li className='mb-2'>
+          <li className='mb-2'>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleBookmark}>
+              <i className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"} me-2 fs-6`}></i>
+              <span>{isBookmarked ? "Remove Bookmark" : "Save"}</span>
+            </button>
+          </li>
+          <li className='mb-2'>
             <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleNotInterested}>
               <i className="bi bi-x me-2 fs-5"></i>
               <span>Not Interested in this post</span>
             </button>
           </li>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={followOrUnfollowHandler}>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' 
+            onClick={followOrUnfollowHandler}>
               <i className={`bi ${isFollowing ? "bi-person-check" : "bi-person-plus"} me-2 fs-5`}></i>
               <span>{!isFollowing ? "Follow" : "Unfollow"} {user?.email}</span>
             </button>
@@ -90,9 +97,9 @@ function ColonCard({ handleShare, postId, post }) {
             </button>
           </li>
           <li className='mb-2'>
-            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={handleNotInterested}>
-              <BiBarChart className='me-2 fs-5' />
-              <span>View post engagements  </span>
+            <button className='fw-normal fs-6 text-secondary d-flex align-items-center' onClick={() => handleShare(postId)}>
+              <i className="bi bi-link-45deg me-2 fs-5"></i>
+              <span>Copy link</span>
             </button>
           </li>
           <li className='mb-2'>

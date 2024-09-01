@@ -53,30 +53,30 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    // avatar: [
-    //     {
-    //         public_id: {
-    //             type: String,
-    //             default:""
-    //         },
-    //         url: {
-    //             type: String,
-    //            default:""
-    //         }
-    //     }
-    // ],
-    // coverImage: [
-    //   {
-    //     public_id: {
-    //       type: String,
-    //       default: "",
-    //     },
-    //     url: {
-    //       type: String,
-    //       default: "",
-    //     },
-    //   },
-    // ],
+    avatar: [
+        {
+            public_id: {
+                type: String,
+                default:""
+            },
+            url: {
+                type: String,
+               default:""
+            }
+        }
+    ],
+    coverImage: [
+      {
+        public_id: {
+          type: String,
+          default: "",
+        },
+        url: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
     followers: [
       {
         type: Schema.Types.ObjectId,

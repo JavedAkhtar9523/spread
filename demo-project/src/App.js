@@ -52,19 +52,7 @@ const MessageManagement = lazy(() => import("./pages/Admin/MessageManagement"));
 const UserManagement = lazy(() => import("./pages/Admin/UserManagement"));
 const ChatManagement = lazy(() => import("./pages/Admin/ChatManagement"));
 
-const sampleComment = {
-  text: "This is a comment.",
-  replies: [
-    {
-      text: "This is a reply.",
-      replies: [
-        {
-          text: "This is a nested reply.",
-        },
-      ],
-    },
-  ],
-};
+
 
 function App() {
   const [sideBar, setSideBar] = useState(false);

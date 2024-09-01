@@ -4,6 +4,7 @@ import { BsFillCheckCircleFill, BsPlusCircleDotted } from "react-icons/bs";
 import { BiDotsVerticalRounded, BiComment } from "react-icons/bi";
 import { MdOutlineThumbUp, MdShare } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
+import {IoIosShareAlt} from 'react-icons/io';
 import TimeAgo from "react-timeago";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -17,6 +18,7 @@ import {
 import { BiRepost } from "react-icons/bi";
 import {
   likePost,
+  repostPost,
   restLikePost,
   unlikePost,
 } from "../../actions/postAction.js";
@@ -24,7 +26,7 @@ import CreateComent from "./Comment/CreateComent.jsx";
 import ColonCard from "./ColonCard";
 import { useOutsideClick } from "../../utlis/useOutsideClick.js";
 import { toast } from "react-toastify";
-import { IoIosShareAlt } from "react-icons/io";
+import PollCard from "./PollCard.jsx";
 // import Comment from "./Comment";
 
 function PostHome({ posts }) {
@@ -39,7 +41,7 @@ function PostHome({ posts }) {
 
   const { user } = useSelector((state) => state.user);
   const userId = user?._id;
-
+ 
   const isLiked = posts?.likes?.includes(userId);
 
   const handleLike = () => {
@@ -52,16 +54,15 @@ function PostHome({ posts }) {
     }
     dispatch(restLikePost());
   };
-  // const handleRepost = () => {
-  //   dispatch(repostPost(posts._id)); // Dispatch repost action
-  //   toast.success("Post reposted!");
-  // };
+  const handleRepost = () => {
+    dispatch(repostPost(posts._id)); 
+  };
 
   const handleColon = () => {
     setColon(!colon);
   };
+  const [currentPostId, setCurrentPostId] = useState(null);
 
-  // useOutsideClick(colonRef, () => setColon(false));
 
   const handleShare = () => {
     const url = `${window.location.origin}/post/${posts._id}`;
@@ -197,6 +198,10 @@ function PostHome({ posts }) {
             />
           </div>
         )}
+        {posts.poll && (
+          <PollCard poll={posts.poll} />
+        )}
+
         {/* ------------------------------- */}
         {/* <div className="d-flex justify-content-between align-items-center mt-1 p-1">
           <div className="d-flex gap-1 align-items-center">
@@ -261,10 +266,12 @@ function PostHome({ posts }) {
               <FaRegComment />
               <span className="action-count">{posts?.comments?.length}</span>
             </button>
-            <button className="action-btn repost-btn">
+            <button className="action-btn repost-btn"
+             onClick={handleRepost}
+            >
               <BiRepost />
               <span className="action-count">
-                {posts?.reposts?.length || 0}
+                {posts?.repostCount}
               </span>
             </button>
 
@@ -290,9 +297,17 @@ function PostHome({ posts }) {
           />
         ))}
       </div> */}
-      {commentBox && <CreateComent postId={posts?._id} />}
+      {commentBox && <CreateComent postId={posts?._id} avatar={user?.avatar[0]?.url}/>}
       {/* <button onClick={() => setCommentBox(!commentBox)}>Comment</button> */}
-    </div>
+      <NavLink 
+        to={`/comment/${posts?._id}`} 
+        style={{ textDecoration: 'none', color: 'gray',fontSize:'0.8rem' }} 
+        className='text-small'
+      >
+       View all {posts?.comments?.length} comments
+     </NavLink>
+    
+  </div>
   );
 }
 

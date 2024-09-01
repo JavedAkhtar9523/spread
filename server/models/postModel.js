@@ -1,23 +1,46 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
-
 // Option Schema for Polls
 const optionSchema = new Schema({
   option: {
     type: String,
+    required: true, 
   },
   votes: {
     type: Number,
-    default: 0
-  }
+    default: 0, 
+  },
+});
+
+const durationSchema = new Schema({
+  days: {
+    type: Number,
+    required: true, 
+  },
+  hours: {
+    type: Number,
+    required: true, 
+  },
+  minutes: {
+    type: Number,
+    required: true, 
+  },
 });
 
 // Poll Schema
 const pollSchema = new Schema({
   question: {
     type: String,
+    required: true, 
   },
-  options: [optionSchema]
+  options: {
+    type: [optionSchema],
+    required: true, 
+  },
+  duration: {
+    type: durationSchema,
+    required: true,
+  },
 });
 
 // Reply Schema for Comments
@@ -144,6 +167,19 @@ const postSchema = new Schema({
     ref: 'User'
   }],
   comments: [commentSchema],
+  isRepost: {
+    type: Boolean,
+    default: false
+  },
+  originalPost: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+    default: null
+  },
+  repostCount: {
+    type: Number,
+    default: 0
+  },
   createdAt: {
     type: Date,
     default: Date.now

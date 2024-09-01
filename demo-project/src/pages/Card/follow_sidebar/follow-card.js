@@ -22,7 +22,7 @@ const ProfileCards = ({ profile }) => {
           }
           alt={`${firstName || "Unknown"} ${lastName || "User"}'s avatar`}
         />
-      </div>
+      </div> 
       <div className="subtitle">
         <div className="d-flex align-items-center">
           <h4 style={{ fontSize: "0.8rem", margin: 0 }}>
@@ -44,7 +44,10 @@ const ProfileCards = ({ profile }) => {
 
 const FollowCard = ({ data }) => {
   const [expands, setExpands] = useState(false);
-  const itemsToShow = expands ? data : data?.slice(0, 4);
+
+  const itemsToShow = expands ? data : data?.slice(0, 3);
+
+
   return (
     <div className="follow-container" style={{ width: "90%" }}>
       <div className="card" style={{ width: "100%" }}>

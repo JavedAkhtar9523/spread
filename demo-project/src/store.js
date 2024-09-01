@@ -20,7 +20,8 @@ import { commentReducer, newCommentReducer, newPostReducer, postsReducer,
   postCommentReducer, postReducer, postDetailsReducer, postLikeReducer, 
   InterestedPostsReducer,
   refreshReducer,
-  commentDeleteReducer} from './reducers/postsReducer';
+  commentDeleteReducer,
+  repostReducer} from './reducers/postsReducer';
 import { AllfollowedUsersReducer,
    bookmarkPostReducer,
    getAllUserReducer, userDetailsReducer,
@@ -37,6 +38,7 @@ const rootReducer=combineReducers({
     posts:postsReducer,
     post:postReducer,
     newPost: newPostReducer,
+    repost:repostReducer,
     userDetails:userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     newComment: newCommentReducer,
@@ -58,7 +60,7 @@ const rootReducer=combineReducers({
     message:messageReducer,
     attachment:attachmentReducer,
     messageAlerts: messageAlertReducer,
-    admin:adminReducer
+    admin:adminReducer,
 })
 
 const middleware = [thunk.withExtraArgument()];
