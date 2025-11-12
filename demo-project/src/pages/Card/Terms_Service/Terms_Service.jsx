@@ -15,6 +15,7 @@ const Terms_Service = () => {
         Recusandae quod, veritatis minima commodi laudantium quasi vero?
         Consequatur, corrupti?
       </p>
+      <h1>Hello Sanjay Ratan</h1>
     </div>
   );
 };
